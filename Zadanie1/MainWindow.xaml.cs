@@ -16,18 +16,24 @@ namespace Zadanie1
 
         private void AddItem_Click(object sender, RoutedEventArgs e)
         {
-            randomizer.AddNewCoupon(TextBox_NewItemName.Text);
-            Label_LastOperation.Content = "Added item " + TextBox_NewItemName.Text;
-            TextBox_NewItemName.Text = "";
-            RefreshList();
+            if (TextBox_NewItemName.Text != string.Empty)
+            {
+                randomizer.AddNewCoupon(TextBox_NewItemName.Text);
+                Label_LastOperation.Content = "Added item " + TextBox_NewItemName.Text;
+                TextBox_NewItemName.Text = "";
+                RefreshList();
+            }
         }
 
         private void GetRandom_Click(object sender, RoutedEventArgs e)
         {
-            string randomCoupon = randomizer.GetRandomCoupon();
-            Label_LastRandomItem.Content = randomCoupon;
-            Label_LastOperation.Content = "Extracted random item " + randomCoupon;
-            RefreshList();
+            if (!randomizer.IsCouponListEmpty())
+            {
+                string randomCoupon = randomizer.GetRandomCoupon();
+                Label_LastRandomItem.Content = randomCoupon;
+                Label_LastOperation.Content = "Extracted random item " + randomCoupon;
+                RefreshList();
+            }
         }
 
         private void RefreshList()
